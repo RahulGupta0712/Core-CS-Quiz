@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/questions_background"
+    tools:context=".QuestionsActivity">
+
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:progressTint="@color/deep_pink"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/quizSubjectImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/textView19"
+        app:layout_constraintEnd_toEndOf="@+id/textView19"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/textView19"
+        app:layout_constraintTop_toBottomOf="@+id/quizSubject"
+        app:srcCompat="@drawable/design_item_leaderboard" />
+
+    <ProgressBar
+        android:id="@+id/progressBarTimer"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="50"
+        android:progressBackgroundTint="@color/dark_green"
+        android:progressTint="@color/dark_red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="Question:"
+        android:textColor="@color/lavender_blush"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/question"
+        app:layout_constraintEnd_toEndOf="@+id/question"
+        app:layout_constraintStart_toStartOf="@+id/question"
+        app:layout_constraintTop_toBottomOf="@+id/quizSubjectImage" />
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:textColor="@color/lavender_blush"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView21"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="Select one of the four options:"
+        android:textColor="@color/lavender_blush"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/option1"
+        app:layout_constraintEnd_toEndOf="@+id/option1"
+        app:layout_constraintStart_toStartOf="@+id/option1"
+        app:layout_constraintTop_toBottomOf="@+id/question" />
+
+    <Button
+        android:id="@+id/option1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:backgroundTint="@color/antique_white"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/option2"
+        app:layout_constraintEnd_toEndOf="@+id/option2"
+        app:layout_constraintStart_toStartOf="@+id/option2"
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+    <Button
+        android:id="@+id/option2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:backgroundTint="@color/antique_white"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/option3"
+        app:layout_constraintEnd_toEndOf="@+id/option3"
+        app:layout_constraintStart_toStartOf="@+id/option3"
+        app:layout_constraintTop_toBottomOf="@+id/option1" />
+
+    <Button
+        android:id="@+id/option3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:backgroundTint="@color/antique_white"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/option4"
+        app:layout_constraintEnd_toEndOf="@+id/option4"
+        app:layout_constraintStart_toStartOf="@+id/option4"
+        app:layout_constraintTop_toBottomOf="@+id/option2" />
+
+    <Button
+        android:id="@+id/option4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:backgroundTint="@color/antique_white"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/nextButton"
+        app:layout_constraintEnd_toEndOf="@+id/nextButton"
+        app:layout_constraintStart_toStartOf="@+id/nextButton"
+        app:layout_constraintTop_toBottomOf="@+id/option3" />
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/chocolate"
+        android:fontFamily="serif"
+        android:text="Next Question"
+        android:textColor="@color/dark_blue"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/option4" />
+
+    <TextView
+        android:id="@+id/quizSubject"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="Quiz subject"
+        android:textAllCaps="true"
+        android:textColor="@color/lavender_blush"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/correctAnimation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/correct" />
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/wrongAnimation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/wrong" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="progressBar,quizSubjectImage,textView19,question,textView21,option1,option2,option3,option4,nextButton,quizSubject,correctAnimation,wrongAnimation, progressBarTimer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
