@@ -30,6 +30,8 @@ class HistoryAdapter(private var datalist: ArrayList<HistoryData>) :
         val sc = datalist[position].score
         if(sc >= 5)
             holder.binding.coinsQuiz.text = "+${sc*10} "
+        else
+            holder.binding.coinsQuiz.text = "+0 "
 
         val time = Date(datalist[position].time) // Convert seconds to milliseconds
         val DateFormat = SimpleDateFormat("HH:mm, d MMMM, yyyy")

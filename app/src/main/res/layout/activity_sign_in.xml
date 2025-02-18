@@ -146,7 +146,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/light_grey"
-        android:drawableStart="@drawable/google"
+        android:drawableLeft="@drawable/google"
         android:text="@string/continue_with_google"
         android:textColor="@color/dim_gray"
         android:textSize="16sp"

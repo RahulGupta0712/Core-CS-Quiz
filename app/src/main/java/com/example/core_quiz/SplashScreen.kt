@@ -15,7 +15,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-@SuppressLint("CustomSplashScreen")
+//@SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {
     private val binding by lazy{
         ActivitySplashScreenBinding.inflate(layoutInflater)

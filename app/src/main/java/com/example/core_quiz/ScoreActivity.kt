@@ -67,9 +67,9 @@ class ScoreActivity : AppCompatActivity() {
         db.child("Leaderboard").child(auth.currentUser!!.uid).runTransaction(object: Transaction.Handler{
             override fun doTransaction(currentData: MutableData): Transaction.Result {
                 val newData = currentData.getValue(LeaderboardData::class.java)?:return Transaction.success(currentData)
-                newData.countOfQuiz++
+                newData.countOfQuizes++
                 newData.sumOfScores += score
-                newData.averageScore = newData.sumOfScores.toDouble() / newData.countOfQuiz
+                newData.averageScore = newData.sumOfScores.toDouble() / newData.countOfQuizes
                 currentData.value = newData
                 return Transaction.success(currentData)
             }

@@ -2,6 +2,7 @@ package com.example.core_quiz
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.widget.ArrayAdapter
 import androidx.activity.enableEdgeToEdge
@@ -39,18 +40,34 @@ class ProfileDetails : AppCompatActivity() {
             insets
         }
 
-        binding.emailEdit.setOnClickListener {
-            FancyToast.makeText(this, "Email can't be edited!", FancyToast.LENGTH_SHORT, FancyToast.WARNING, false).show()
+        binding.emailEdit.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                FancyToast.makeText(
+                    this,
+                    "Email can't be edited!",
+                    FancyToast.LENGTH_SHORT,
+                    FancyToast.WARNING,
+                    false
+                ).show()
+            }
+            true
         }
 
         binding.passwordEdit.setOnClickListener {
-            if(!binding.updatePasswordCheckButton.isChecked){
-                FancyToast.makeText(this, "Select the Password Update Checkbox to update password!", FancyToast.LENGTH_SHORT, FancyToast.WARNING, false).show()
+            if (!binding.updatePasswordCheckButton.isChecked) {
+                FancyToast.makeText(
+                    this,
+                    "Select the Password Update Checkbox to update password!",
+                    FancyToast.LENGTH_SHORT,
+                    FancyToast.WARNING,
+                    false
+                ).show()
             }
         }
 
         // set up the countries spinner
-        val spinnerAdapter = ArrayAdapter(this, android.R.layout.preference_category, Countries.list)
+        val spinnerAdapter =
+            ArrayAdapter(this, android.R.layout.preference_category, Countries.list)
         binding.countryEdit.setAdapter(spinnerAdapter)
         binding.countryEdit.onClearClick {
             binding.countryEdit.clearSelectedText()
@@ -155,11 +172,12 @@ class ProfileDetails : AppCompatActivity() {
         age: Int,
         country: String,
         profilePic: Int
-    ){
+    ) {
         databaseReference.child("users").child(userId).child("userData")
-            .setValue(UserData(name, email, password, age, country, R.drawable.user,coins))
+            .setValue(UserData(name, email, password, age, country, R.drawable.user, coins))
             .addOnSuccessListener {
-                databaseReference.child("Leaderboard").child(auth.currentUser!!.uid).child("name").setValue(name)
+                databaseReference.child("Leaderboard").child(auth.currentUser!!.uid).child("name")
+                    .setValue(name)
                     .addOnSuccessListener {
                         FancyToast.makeText(
                             this,
@@ -173,7 +191,11 @@ class ProfileDetails : AppCompatActivity() {
                     }
                     .addOnFailureListener {
                         FancyToast.makeText(
-                            this, "Data Update Failed!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false
+                            this,
+                            "Data Update Failed!",
+                            FancyToast.LENGTH_SHORT,
+                            FancyToast.ERROR,
+                            false
                         ).show()
                     }
             }.addOnFailureListener {
