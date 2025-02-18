@@ -9,7 +9,7 @@ import com.example.core_quiz.DataModel.Category
 import com.example.core_quiz.QuestionsActivity
 import com.example.core_quiz.databinding.ItemViewRvCategoryBinding
 
-class CategoryAdapter(var datalist : ArrayList<Category>, var context : Context) :RecyclerView.Adapter<CategoryAdapter.MyViewHolder>(){
+class CategoryAdapter(private var datalist : ArrayList<Category>, var context : Context) :RecyclerView.Adapter<CategoryAdapter.MyViewHolder>(){
 
     inner class MyViewHolder(var binding:ItemViewRvCategoryBinding) : RecyclerView.ViewHolder(binding.root)
 

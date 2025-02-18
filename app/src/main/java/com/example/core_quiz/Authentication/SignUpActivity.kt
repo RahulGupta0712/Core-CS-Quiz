@@ -10,12 +10,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.core_quiz.DataModel.LeaderboardData
 import com.example.core_quiz.DataModel.UserData
-import com.example.core_quiz.MainActivity
 import com.example.core_quiz.R
 import com.example.core_quiz.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.database
 import com.shashank.sony.fancytoastlib.FancyToast
 
 class SignUpActivity : AppCompatActivity() {

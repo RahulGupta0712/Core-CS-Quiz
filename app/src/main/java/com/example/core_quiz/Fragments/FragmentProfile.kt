@@ -2,12 +2,10 @@ package com.example.core_quiz.Fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core_quiz.Adapter.HistoryAdapter
 import com.example.core_quiz.Authentication.MainAuthActivity
@@ -16,7 +14,6 @@ import com.example.core_quiz.DataModel.UserData
 import com.example.core_quiz.ProfileDetails
 import com.example.core_quiz.R
 import com.example.core_quiz.databinding.FragmentProfileBinding
-import com.google.firebase.Firebase
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -65,8 +62,8 @@ class FragmentProfile : Fragment() {
         return binding.root
     }
 
-    var isExpandedNow = false
-    var isExpandedHistoryNow = false
+    private var isExpandedNow = false
+    private var isExpandedHistoryNow = false
 
     private lateinit var datalist: ArrayList<HistoryData>
     private lateinit var adapter: HistoryAdapter

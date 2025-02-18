@@ -7,19 +7,13 @@ import android.os.Handler
 import android.os.Looper
 import android.view.KeyEvent
 import android.view.View
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.BounceInterpolator
-import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
-import android.widget.ProgressBar
-import android.widget.Toast
+
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 import androidx.lifecycle.lifecycleScope
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.core_quiz.CountdownTimer.Timer
@@ -28,11 +22,9 @@ import com.example.core_quiz.databinding.ActivityQuestionsBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.toObject
 import com.shashank.sony.fancytoastlib.FancyToast
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import java.sql.Time
 
 class QuestionsActivity : AppCompatActivity() {
 
@@ -41,9 +33,9 @@ class QuestionsActivity : AppCompatActivity() {
     }
 
     private lateinit var questionsList: List<QuestionData>
-    var currQuestionIndex = -1
-    var selectedOption = ""
-    var score = 0
+    private var currQuestionIndex = -1
+    private var selectedOption = ""
+    private var score = 0
     private var subject = ""
     private lateinit var timer: Timer
     private lateinit var progressTimer: ObjectAnimator
@@ -180,12 +172,12 @@ class QuestionsActivity : AppCompatActivity() {
         if (currQuestionIndex == 9) {
             // this was the last question
             // move to score activity
-            var intent = Intent(this, ScoreActivity::class.java)
+            val intent = Intent(this, ScoreActivity::class.java)
             intent.putExtra("score", score)
             intent.putExtra("subject", subject)
             startActivity(intent)
             finish()
-            return;
+            return
         } else if (currQuestionIndex == 8) {
             // next question is last one
             // change text of "next question"
@@ -222,9 +214,7 @@ class QuestionsActivity : AppCompatActivity() {
 
         // currently, we have 20 questions for each subject, so we are fetching total 15 here, and then will take 10 out of them in the end
 
-        var LIMIT = 15L
-
-//        var cnt = 0
+        val LIMIT = 15L
 
         // First query: Get documents >= randomValue
         val firstQuery = db.collection(subject)

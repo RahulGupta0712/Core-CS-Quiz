@@ -1,21 +1,15 @@
 package com.example.core_quiz.Fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.core_quiz.DataModel.QuestionData
-import com.example.core_quiz.R
 import com.example.core_quiz.databinding.FragmentAddQuestionBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.firebase.Firebase
-import com.google.firebase.database.database
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.firestore
-import java.util.UUID
 
 
 class FragmentAddQuestion : BottomSheetDialogFragment() {
@@ -32,7 +26,7 @@ class FragmentAddQuestion : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         return binding.root
     }

@@ -2,7 +2,6 @@ package com.example.core_quiz
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,7 +15,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.MutableData
 import com.google.firebase.database.Transaction
-import com.google.firebase.database.ValueEventListener
 import com.shashank.sony.fancytoastlib.FancyToast
 
 class ScoreActivity : AppCompatActivity() {
@@ -69,9 +67,9 @@ class ScoreActivity : AppCompatActivity() {
         db.child("Leaderboard").child(auth.currentUser!!.uid).runTransaction(object: Transaction.Handler{
             override fun doTransaction(currentData: MutableData): Transaction.Result {
                 val newData = currentData.getValue(LeaderboardData::class.java)?:return Transaction.success(currentData)
-                newData.countOfQuizes++
+                newData.countOfQuiz++
                 newData.sumOfScores += score
-                newData.averageScore = newData.sumOfScores.toDouble() / newData.countOfQuizes
+                newData.averageScore = newData.sumOfScores.toDouble() / newData.countOfQuiz
                 currentData.value = newData
                 return Transaction.success(currentData)
             }

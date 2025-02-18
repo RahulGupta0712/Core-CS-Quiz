@@ -3,14 +3,13 @@ package com.example.core_quiz.Adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core_quiz.DataModel.LeaderboardData
 import com.example.core_quiz.R
 import com.example.core_quiz.databinding.ItemLeaderboardBinding
 import com.google.firebase.auth.FirebaseAuth
 
-class LeaderboardAdapter(var datalist:ArrayList<LeaderboardData>, var context:Context) : RecyclerView.Adapter<LeaderboardAdapter.myViewHolder>(){
+class LeaderboardAdapter(private var datalist:ArrayList<LeaderboardData>, var context:Context) : RecyclerView.Adapter<LeaderboardAdapter.myViewHolder>(){
     inner class myViewHolder(var binding:ItemLeaderboardBinding):RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewHolder {

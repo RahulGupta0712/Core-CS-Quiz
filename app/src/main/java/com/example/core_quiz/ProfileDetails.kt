@@ -2,12 +2,8 @@ package com.example.core_quiz
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputType
 import android.view.View
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
-import android.widget.CompoundButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,9 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.core_quiz.DataModel.UserData
 import com.example.core_quiz.List.Countries
 import com.example.core_quiz.databinding.ActivityProfileDetailsBinding
-import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -43,6 +37,16 @@ class ProfileDetails : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        binding.emailEdit.setOnClickListener {
+            FancyToast.makeText(this, "Email can't be edited!", FancyToast.LENGTH_SHORT, FancyToast.WARNING, false).show()
+        }
+
+        binding.passwordEdit.setOnClickListener {
+            if(!binding.updatePasswordCheckButton.isChecked){
+                FancyToast.makeText(this, "Select the Password Update Checkbox to update password!", FancyToast.LENGTH_SHORT, FancyToast.WARNING, false).show()
+            }
         }
 
         // set up the countries spinner
@@ -138,7 +142,7 @@ class ProfileDetails : AppCompatActivity() {
             }
         }
 
-        binding.updatePasswordCheckButton.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.updatePasswordCheckButton.setOnCheckedChangeListener { _, isChecked ->
             binding.passwordEdit.isEnabled = isChecked
         }
     }

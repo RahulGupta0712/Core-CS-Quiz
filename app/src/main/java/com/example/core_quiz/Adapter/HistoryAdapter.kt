@@ -6,11 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.core_quiz.DataModel.HistoryData
 import com.example.core_quiz.databinding.ItemViewHistoryBinding
 import java.text.SimpleDateFormat
-
 import java.util.Date
-import java.util.TimeZone
 
-class HistoryAdapter(var datalist: ArrayList<HistoryData>) :
+class HistoryAdapter(private var datalist: ArrayList<HistoryData>) :
     RecyclerView.Adapter<HistoryAdapter.myViewHolder>() {
     inner class myViewHolder(var binding: ItemViewHistoryBinding) :
         RecyclerView.ViewHolder(binding.root)

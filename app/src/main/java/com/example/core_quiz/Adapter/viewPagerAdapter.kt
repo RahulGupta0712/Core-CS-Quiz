@@ -9,7 +9,7 @@ import com.example.core_quiz.Fragments.FragmentProfile
 
 class viewPagerAdapter(fragmentActivity:FragmentActivity) :FragmentStateAdapter(fragmentActivity){
 
-    val fragments = arrayOf(FragmentHome(), FragmentLeaderboard(), FragmentProfile())
+    private val fragments = arrayOf(FragmentHome(), FragmentLeaderboard(), FragmentProfile())
 
     override fun getItemCount(): Int {
         return fragments.size

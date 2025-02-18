@@ -6,7 +6,6 @@ import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.KeyEvent
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -177,10 +176,9 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    fun handleSignIn(result: GetCredentialResponse) {
+    private fun handleSignIn(result: GetCredentialResponse) {
         // Handle the successfully returned credential.
-        val credential = result.credential
-        when (credential) {// GoogleIdToken credential
+        when (val credential = result.credential) {// GoogleIdToken credential
             is CustomCredential -> {
                 if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
                     try {
@@ -203,7 +201,7 @@ class SignInActivity : AppCompatActivity() {
                                                 databaseReference.child("Leaderboard").child(userId).setValue(
                                                     LeaderboardData("", 0, 0.0,0, auth.currentUser!!.uid)
                                                 ).addOnSuccessListener {
-                                                    val intent = Intent(this@SignInActivity, ProfileDetails::class.java);
+                                                    val intent = Intent(this@SignInActivity, ProfileDetails::class.java)
                                                     intent.putExtra("google", true)
                                                     startActivity(intent)
                                                     finishAffinity()
@@ -212,7 +210,7 @@ class SignInActivity : AppCompatActivity() {
                                             }
                                             else{
                                                 // Entry exists — [User Exists]
-                                                val intent = Intent(this@SignInActivity, MainActivity::class.java);
+                                                val intent = Intent(this@SignInActivity, MainActivity::class.java)
                                                 intent.putExtra("google", true)
                                                 startActivity(intent)
                                                 finishAffinity()
