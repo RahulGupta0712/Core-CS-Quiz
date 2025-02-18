@@ -72,4 +72,7 @@ dependencies {
     implementation( "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4") // For Firestore await()
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
+    // sweet alert dialog
+    implementation("com.github.f0ris.sweetalert:library:1.5.6")
+
 }

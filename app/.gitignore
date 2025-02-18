@@ -32,7 +32,3 @@ strings.xml
 
 # Android Profiling
 *.hprof
-
-# Avoid question adding page
-/app/src/main/java/com/example/core_quiz/Fragments/FragmentAddQuestion.kt
-/app/src/main/res/layout/fragment_add_question.xml

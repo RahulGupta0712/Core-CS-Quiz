@@ -1,21 +1,31 @@
 package com.example.core_quiz
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.KeyEvent
 import android.view.View
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.BounceInterpolator
+import android.view.animation.DecelerateInterpolator
+import android.view.animation.LinearInterpolator
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 import androidx.lifecycle.lifecycleScope
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.core_quiz.CountdownTimer.Timer
 import com.example.core_quiz.DataModel.QuestionData
 import com.example.core_quiz.databinding.ActivityQuestionsBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.toObject
@@ -35,7 +45,8 @@ class QuestionsActivity : AppCompatActivity() {
     var selectedOption = ""
     var score = 0
     private var subject = ""
-    private lateinit var timer:Timer
+    private lateinit var timer: Timer
+    private lateinit var progressTimer: ObjectAnimator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +63,19 @@ class QuestionsActivity : AppCompatActivity() {
 
 //        addQuestions()
 
-        timer = Timer(30*1000, 1000, binding)
+        // show hint when clicked on question progress bar and timer
+        binding.progressBar.setOnClickListener {
+            Snackbar.make(binding.root, "Progress of Questions", Snackbar.LENGTH_SHORT).setAnchorView(binding.progressBar).show()
+        }
+        binding.progressBarTimer.setOnClickListener {
+            Snackbar.make(binding.root, "Time Left", Snackbar.LENGTH_SHORT).setAnchorView(binding.quizSubjectImage).show()
+        }
+
+        timer = Timer(30 * 1000, 1000, binding)
+        binding.progressBarTimer.max = 100
+
+        progressTimer = ObjectAnimator.ofInt(binding.progressBarTimer, "progress", 0, 100).setDuration(30*1000)
+        progressTimer.interpolator = LinearInterpolator()
 
         val image = intent.getIntExtra("quiz subject image", R.drawable.background_transparent)
         subject = intent.getStringExtra("quiz subject") ?: ""
@@ -66,24 +89,39 @@ class QuestionsActivity : AppCompatActivity() {
             if (questionsList.size >= 10) {
                 updateDetails()
                 binding.group.visibility = View.VISIBLE
-                binding.correctAnimation.visibility=View.GONE
-                binding.wrongAnimation.visibility=View.GONE
+                binding.correctAnimation.visibility = View.GONE
+                binding.wrongAnimation.visibility = View.GONE
                 binding.progressBar3.visibility = View.GONE
             }
         }
 
         binding.nextButton.setOnClickListener {
-            if(timeUp){
+            if (timeUp) {
                 timer.cancel()
-                FancyToast.makeText(this, "Time's up!", FancyToast.LENGTH_SHORT, FancyToast.DEFAULT, false).show()
+                progressTimer.cancel()
+
+                FancyToast.makeText(
+                    this,
+                    "Time's up!",
+                    FancyToast.LENGTH_SHORT,
+                    FancyToast.DEFAULT,
+                    false
+                ).show()
                 updateDetails()
-                timeUp=false
-            }
-            else if (selectedOption == "") {
+                timeUp = false
+            } else if (selectedOption == "") {
                 // no option is selected, we will now allow user to skip a question without selecting an option
-                FancyToast.makeText(this, "Choose 1 option!", FancyToast.LENGTH_SHORT, FancyToast.WARNING, false).show()
+                FancyToast.makeText(
+                    this,
+                    "Choose 1 option!",
+                    FancyToast.LENGTH_SHORT,
+                    FancyToast.WARNING,
+                    false
+                ).show()
             } else {
                 timer.cancel()
+                progressTimer.cancel()
+
                 binding.nextButton.isEnabled = false
                 if (selectedOption == questionsList[currQuestionIndex].correctAns) {
                     binding.correctAnimation.visibility = View.VISIBLE
@@ -172,6 +210,8 @@ class QuestionsActivity : AppCompatActivity() {
 
         binding.nextButton.isEnabled = true
         timer.start()
+        progressTimer.start()
+
     }
 
     private suspend fun fetchRandomDocuments(subject: String): List<QuestionData> {
@@ -184,7 +224,7 @@ class QuestionsActivity : AppCompatActivity() {
 
         var LIMIT = 15L
 
-        var cnt = 0
+//        var cnt = 0
 
         // First query: Get documents >= randomValue
         val firstQuery = db.collection(subject)
@@ -214,9 +254,41 @@ class QuestionsActivity : AppCompatActivity() {
         return results.shuffled().take(10)
     }
 
-    companion object{
+    companion object {
         var timeUp = false
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        timer.cancel()
+        progressTimer.cancel()
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        // Check whether the key event is the Back button and if there's history.
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Quit")
+                .setContentText("Do you want to quit the quiz?")
+                .setConfirmButton("NO"){
+                    it.dismiss()
+                }
+                .setCancelButton("YES"){
+                    FancyToast.makeText(this, "Quit Successful", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                    it.dismiss()
+                }
+                .show()
+
+            return true
+        }
+        // If it isn't the Back button or there isn't web page history, bubble up to
+        // the default system behavior. Probably exit the activity.
+        return super.onKeyDown(keyCode, event)
+    }
+
 
 
 //    private fun addQuestions() {

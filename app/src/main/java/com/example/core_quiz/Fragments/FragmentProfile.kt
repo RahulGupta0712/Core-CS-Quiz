@@ -168,7 +168,13 @@ class FragmentProfile : Fragment() {
                         binding.password.text = data.password
                         binding.age.text = data.age.toString()
                         binding.country.text = data.country
-                        binding.profileImage.setImageResource(data.profilePic)
+                        try{
+                            binding.profileImage.setImageResource(data.profilePic)
+                        }
+                        catch(e:Exception){
+                            binding.profileImage.setImageResource(R.drawable.user)
+                        }
+
                     }
                 }
 

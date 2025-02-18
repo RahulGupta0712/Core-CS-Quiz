@@ -1,6 +1,7 @@
 package com.example.core_quiz.Fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.core_quiz.Adapter.CategoryAdapter
 import com.example.core_quiz.DataModel.Category
 import com.example.core_quiz.DataModel.UserData
+import com.example.core_quiz.List.ADMIN
 import com.example.core_quiz.R
 import com.example.core_quiz.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -58,7 +60,7 @@ class FragmentHome : Fragment() {
         val databaseReference = FirebaseDatabase.getInstance().reference
         val userId = auth.currentUser!!.uid
 
-        if(auth.currentUser!!.email == FragmentAddQuestion().ADMIN){
+        if(auth.currentUser!!.email in ADMIN.list){
             // add question feature is ON
             binding.addQuestionButton.visibility = View.VISIBLE
         }
@@ -75,7 +77,14 @@ class FragmentHome : Fragment() {
                     val data = snapshot.getValue(UserData::class.java)
                     data?.let {
                         binding.userName.text = data.name
-                        binding.userImage.setImageResource(data.profilePic)
+                        Log.d("abc", "${data.profilePic}")
+                        try{
+                            binding.userImage.setImageResource(data.profilePic)
+                        }
+                        catch(e:Exception){
+                            binding.userImage.setImageResource(R.drawable.user)
+                        }
+
                         binding.coins.text = "${data.coins} Coins"
                     }
                 }
